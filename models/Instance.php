@@ -5,9 +5,6 @@ class Instance
     public function __construct($data)
     {
         $this->data = $data;
-        //$this->venue = $data['venue'];
-        //echo "\naaaaaaaaaa";
-        //print_r($data['venue']);
     }
 
     public function time($format = null)

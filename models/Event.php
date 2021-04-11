@@ -5,7 +5,6 @@ class Event
     public function __construct($data)
     {
         $this->data = $data;
-        //$this->venue = $this->data['venue'];
     }
 
     public function dateRange()
@@ -55,48 +54,22 @@ class Event
         foreach ($events as $k => $e) {
             $event = new Event($e);
             foreach ($e['instances'] as $ki => $i) {
-                //print_r($i);
                 $instance = new Instance([
                     'id'       => $i['id'],
                     'datetime' => $i['datetime'],
                     'venue'    => $i['venue'],
                 ]);
-                //echo "\ninstance->time   " . $instance->time('H:m');
                 $instance->venue = $event->venue();
-                //echo "\ninstance->venue   " . $instance->venue;
                 $instance_id[] = $instance;
                 foreach ($i as $kd => $d) {
-                    // print_r($d['datetime']);
 
                     if ($kd === 'datetime') {
                         $event_date[] = $d;
-
-                        /*echo "\n www";
-                        print_r($d);
-                        echo "\n xxxx";*/
                     }
                 }
             }
         }
         $instance_id_by_date = array_combine($event_date, $instance_id);
-        //print_r($instance_id);
-        //print_r($event_date);
-
-        //print_r($instance_id_by_date);
-
-
-        //echo (date("Y-m-d", $t));
-        /*$event_id = array_column($events, 'id');
-        $event_date = array_column($events, 'datetime');
-        $events_id_date = array_combine($event_id, $event_date);
-        */
-
         return $instance_id_by_date;
-        // $GLOBALS['events_id_date'] = $events_id_date;
-        /*return [
-            new Event(getEventFromData('Matilda')),
-            new Event(getEventFromData('The Phantom of the Opera')),
-            new Event(getEventFromData('School of Rock')),
-        ];*/
     }
 }
